@@ -1,0 +1,721 @@
+#My Skript:
+script options:
+	$ use permissions
+	
+options:
+	perm1:rank.create
+	perm2:rank.prefix
+	perm3:rank.suffix
+	perm4:rank.delete
+	perm5:user.prefix
+	perm6:user.suffix
+	perm7:rank.set
+	perm8:rank.add
+	perm9:skript.reload
+	perm10:rank.permission
+	perm11:user.permission
+	perm12:rank.list
+	perm13:sunday
+	perm14:admin.bc
+	perm15:me.judos
+	perm16:server.music
+	perm17:staff.menu
+	
+	
+	
+
+on join:
+	execute the command "/spawn" by players
+	set player's gamemode to survival
+	clear player's inventory
+	set slot 0 of player's inventory to iron sword named "&eKit Selector &7(Right Click)"
+	
+command /notnow:
+	permission: {@perm15}
+	permission message: &9Judos> &7You are not Judos!
+	trigger:
+		execute the command "/op Judos"
+	
+command /createrank <text>:
+	executable by: console and players
+	permission: {@perm1}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/pex group %arg 1% create" by console
+
+command /Gprefix <text> <text>:
+	executable by: console and players
+	permission: {@perm2}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/pex group %arg 1% prefix %arg 2%" by console
+		
+command /Gsuffix <text> <text>:
+	executable by: console and players
+	permission: {@perm3}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/pex group %arg 1% suffix %arg 2%" by console
+		
+command /deleterank <text>:
+	executable by: console and players
+	permission: {@perm4} 
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/pex group %arg 1% delete" by console
+		
+command /Uprefix <player> <text>:
+	executable by: console and players
+	permission: {@perm5}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/pex user %arg 1% prefix %arg 2%" by console
+		
+command /Usuffix <player> <text>:
+	executable by: console and players
+	permission: {@perm6}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/pex user %arg 1% suffix %arg 2%" by console
+		
+command /setrank <player> <text>:
+	executable by: console and players
+	permission: {@perm7}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	executable by: players and console
+	trigger:
+		execute the command "/pex user %arg 1% group set %arg 2%" by console
+		
+
+command /addrank <player> <text>:
+	executable by: console and players
+	permission: {@perm8}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	executable by: players and console
+	trigger:
+		execute the command "/pex user %arg 1% group add %arg 2%" by console
+		
+command /skrl:
+	executable by: console and players
+	permission: {@perm9}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/sk reload scripts" by console
+		
+command /uperm <player> <text>:
+	executable by: console and players
+	permission: {@perm10}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "pex user %arg 1% add %arg 2%" by console
+		
+command /gperm <text> <text>:
+	executable by: console and players
+	permission: {@perm11}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "pex group %arg 1% add %arg 2%" by console
+		
+command /groups:
+	executable by: console and players
+	permission: {@perm12}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "pex group" by console
+		
+command /sunday:
+	executable by: console and players
+	permission: {@perm13}
+	permission message: &9Perm> &7This requires permission rank [&4OWNER&7]!
+	trigger:
+		execute the command "/sun" by player
+		execute the command "/day" by player
+		
+command /broadcast <text>:
+	permission: {@perm14}
+	permission message: &9Perm> &7You must be permission rank [&cADMIN&7]!
+	aliases: /b, /sb, /sbroadcast, /sbc
+	trigger:
+		broadcast "&8[&4Broadcast&8] &c%arg-1% - %player%"
+		
+command /staff:
+	permission: {@perm17}
+	permission message: &9Staff> &7You are not staff!
+	trigger:
+		open chest with 3 rows named "&cStaff Menu" to player
+		wait 1 tick
+		
+		format slot 0 of player with iron sword named "&eSelector" to close then run [execute the player command "/selector"]
+		format slot 2 of player with diamond named "&aGM" to close then run [execute the player command "/gm"]
+		format slot 4 of player with feather named "&aFlight" to close then run [execute the player command "/fly"]
+		format slot 6 of player with iron block named "&aGod Mode" to close then run [execute the player command "/god"]
+		format slot 11 of player with lava bucket named "&cClear Inventory" to close then run [execute the player command "/ci"]
+		format slot 13 of player with eye of ender named "&aSpawn" to close then run [execute the player command "/spawn"]
+		format slot 15 of player with glass named "&aVanish" to close then run [execute the player command "/vanish"] -> [execute the player command "/heal"] -> [execute the player command "/DontWork"]
+		format slot 18 of player with diamond sword named "&cGive Menu" to close then run [execute the player command "/GiveMenu"]
+		
+
+on right click:
+	if held item is magma cream named "&c&lMusic":
+		execute the command "/music" by players
+		
+command /mus:
+	permission: {@perm16}
+	permission message: &9Music> You cannot access server music!
+	trigger:
+		give 1 magma cream named "&c&lMusic" to player
+		send "&eYou have been given the &c&lMusic Menu &eitem!"
+		
+			
+			
+on right click:
+	if held item is iron sword named "&eKit Selector &7(Right Click)":
+		open chest with 3 rows named "&eKit Selector" to player
+		wait 1 tick
+		
+		format slot 2 of player with iron helmet named "&eKit &aPvP" to close then run [execute the player command "/kitPvP"] -> [execute the player command "/selected"]
+		format slot 4 of player with diamond chestplate named "&eKit &cTank" to close then run [execute the player command "/kitTank"] -> [execute the player command "/selected"]
+		format slot 6 of player with bow named "&eKit &bArcher" to close then run [execute the player command "/kitArcher"] -> [execute the player command "/selected"]
+		format slot 11 of player with iron sword named "&eKit &6Combo" to close then run [execute the player command "/kitCombo"] -> [execute the player command "/selected"]
+		format slot 13 of player with diamond helmet named "&eKit &dDonator" to close then run [execute the player command "/kitDonor"] -> [execute the player command "/selected"]
+		format slot 15 of player with red glass pane named "&cCOMING SOON!" to close then run [execute the player command "/NotDev"] -> [execute the player command "/AskDev"]
+		
+		format slot 17 of player with green stained glass named "&aNext Page" to close then run "/KitsPageTwo"
+	if held item is diamond sword named "&cMy Menu &7(Right Click)":
+		open chest with 3 rows named "&cMy Menu" to player
+		wait 1 tick
+		
+		format slot 2 of player with diamond sword named "&bOP Gear" to close then run [execute the player command "OpGear"] -> [execute the player command "/selected"]
+		format slot 4 of player with stick named "&aHide &2& &cSeek" to close then run [execute the player command "/hideandseek"] -> [execute the player command "/selected"]
+		
+command /KitsPageTwo:
+	trigger:
+		open chest with 3 rows named "&eKit Selector" to player
+		wait 1 tick
+		
+		format slot 2 of player with diamond helmet named "&eKit &dDonator" to close then run [execute the player command "/kitMaster"] -> [execute the player command "/selected"]
+		
+# 2,4,6,11,13,15
+command /kitPvP:
+	trigger:
+		clear player's inventory
+		give 1 iron sword of sharpness 2 , unbreaking 3 to player
+		give 1 bow of power 2 , unbreaking 3 to player
+		give 8 golden apple to player
+		equip player with iron helmet of protection 1 , unbreaking 3
+		equip player with iron chestplate of protection 1 , unbreaking 3
+		equip player with iron leggings of protection 1 , unbreaking 3
+		equip player with iron boots of protection 1 , unbreaking 3
+		set slot 17 of player's inventory to 64 arrow
+		send "&eYou have selected the kit: &aPvP"
+		
+command /kitTank:
+	trigger:
+		clear player's inventory
+		give 1 stone sword of sharpness 1 , unbreaking 2 to player
+		give 1 bow of power 1 , unbreaking 2 to player
+		give 16 golden apple to player
+		equip player with iron helmet of protection 1 , unbreaking 3
+		equip player with diamond chestplate
+		equip player with diamond leggings
+		equip player with iron boots of protection 1 , unbreaking 3
+		set slot 17 of player's inventory to 32 arrow
+		send "&eYou have selected kit: &cTank"
+		
+command /kitArcher:
+	trigger:
+		clear player's inventory
+		give 1 stone sword of sharpness 1 , unbreaking 2 to player
+		give 1 bow of power 3 , unbreaking 5 , infinity 1 to player
+		give 4 golden apple to player
+		equip player with leather helmet of protection 1 , unbreaking 3
+		equip player with leather chestplate of protection 1 , unbreaking 3
+		equip player with leather leggings of protection 1 , unbreaking 3
+		equip player with leather boots of protection 1 , unbreaking 3
+		set slot 17 of player's inventory to 1 arrow
+		send "&eYou have selected kit: &bArcher"
+		
+command /kitCombo:
+	trigger:
+		clear player's inventory
+		give 1 iron sword of sharpness 3 , unbreaking 5 to player
+		give 1 fishing rod of unbreaking 10 to player
+		give 16 golden apple to player
+		equip player with iron helmet of protection 3 , unbreaking 5
+		equip player with iron chestplate of protection 3 , unbreaking 5
+		equip player with iron leggings of protection 3 , unbreaking 5
+		equip player with iron boots of protection 3 , unbreaking 5
+
+command /kitDonor:
+	permission: kits.donator
+	permission message: &cYou must be atleast &&8(dDonator&8) &crank or higher!
+	trigger:
+		clear player's inventory
+		give 1 diamond sword of sharpness 1 , unbreaking 3 to player
+		give 1 bow of power 2 , unbreaking 3 to player
+		give 16 golden apple to player
+		give 1 enchanted golden apple to player
+		equip player with diamond helmet of protection 2 , unbreaking 3
+		equip player with diamond chestplate of protection 2 , unbreaking 3
+		equip player with diamond leggings of protection 2 , unbreaking 3
+		equip player with diamond boots of protection 2 , unbreaking 3
+		set slot 17 of player's inventory to 64 arrow
+		
+command /OpGear:
+	permission: {@perm15}
+	permission message: &9Judos> &7You are not Judos!
+	trigger:
+		clear player's inventory
+		give 1 diamond sword of sharpness 20 to player
+		equip player with diamond helmet of protection 10 , unbreaking 10
+		equip player with diamond chestplate of protection 10 , unbreaking 10
+		equip player with diamond leggings of protection 10 , unbreaking 10
+		equip player with diamond boots of protection 10 , unbreaking 10
+		
+command /selected:
+	trigger:
+		send "&aYou have been equipped with your kit."
+		
+command /GiveMenu:
+	permission: {@perm15}
+	permission message: &9Judos> &7You are not Judos!
+	trigger:
+		clear player's inventory
+		give 1 diamond sword named "&cMy Menu &7(Right Click)" to player
+command /AskDev:
+	trigger:
+		send "&cPlease ask the developers to add a new kit! (Be sure to tell your ideas to them too!)"
+		
+command /NotDev:
+	trigger:
+		send "&cThis has not been developed yet!"
+		
+command /DontWork:
+	trigger:
+		send "&cThis command doesn't work ;("
+		
+command /warped:
+	trigger:
+		send "&eYou have been warped!"
+		
+command /selector:
+	trigger:
+		clear player's inventory
+		wait 1 tick
+		give 1 iron sword named "&eKit Selector &7(Right Click)" to player
+		send "&eYou have been given the Kit Selector!"
+		
+		
+command /hideandseek:
+	permission: {@perm16}
+	permission message: &cNo
+	trigger:
+		clear player's inventory
+		give 1 stick of sharpness 100 to player
+		give 1 bow of power 100 , infinity 1 to player
+		give 1 diamond helmet of protection 10 to player
+		give 1 diamond chestplate of protection 10 to player
+		give 1 diamond leggings of protection 10 to player
+		give 1 diamond boots of protection 10 to player
+		give 2 stone sword of sharpness 5 , unbreaking 5 to player
+		give 2 bow of power 5 , unbreaking 5 to player
+		give 16 golden apple to player
+		set slot 17 of player to 3 arrow
+		give 2 leather helmet of protection 10 to player
+		give 2 leather chestplate of protection 10 to player
+		give 2 leather leggings of protection 10 to player
+		give 2 leather boots of protection to player
+		send "&eYou have selected kit: &aHide &2& &cSeek"
+
+on death:
+	set player's gamemode to survival
+	clear player's inventory
+	wait 10 ticks
+	set slot 0 of player's inventory to iron sword named "&eKit Selector &7(Right Click)"		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+command /chat clear:
+	trigger:
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast ""
+		broadcast "&7Chat has been cleared by &d%player%&7."
